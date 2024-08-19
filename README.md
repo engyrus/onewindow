@@ -14,3 +14,5 @@ To it install it in Kiwi:
 - In Kiwi, Menu > Extensions
 - Click "+ (from .zip/.crx/.user.js)" button
 - Choose the OneWindow.crx file you downloaded.
+
+Reddit thread: https://www.reddit.com/r/kiwibrowser/comments/1861zpw/oc_extension_to_keep_all_your_tabs_in_one_window/
