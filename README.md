@@ -1,8 +1,8 @@
 # OneWindow
 
-*An extension for Chromium-based browsers*
+*An extension for Chromium-based browsers that forces all tabs into a single window*
 
-I wrote this extension for use with Kiwi Browser, an Android Chromium-based browser that supports extensinso, but it should work with any Chromium-based browser.
+I wrote this extension for use with [Kiwi Browser](https://kiwibrowser.com/), an Android Chromium-based browser that supports extensinso, but it should work with any Chromium-based browser.
 
 Chrome for Android opens links from external apps in new windows and Kiwi Browser inherited this behavior. Sometimes Kiwi doesn't show the right window, uBlock origin's element picker doesn't work right because it's looking in another window, etc. All in all, Kiwi doesn't seem too happy to support multiple windows at the moment.
 
