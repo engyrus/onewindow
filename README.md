@@ -2,7 +2,7 @@
 
 *An extension for Chromium-based browsers that forces all tabs into a single window*
 
-I wrote this extension for use with [Kiwi Browser](https://kiwibrowser.com/), an Android Chromium-based browser that supports extensions, but it should work with any Chromium-based browser, including desktop browsers.
+I wrote this extension for use with [Kiwi Browser](https://kiwibrowser.com/), an Android Chromium-based browser that supports extensions, but it should work with any [Chromium-based browser](https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium), including desktop browsers.
 
 Chrome for Android opens links from external apps in new windows and Kiwi Browser inherited this behavior. Sometimes Kiwi doesn't show the right window, uBlock Origin's element picker doesn't work right because it's looking in the wrong window, etc. All in all, Kiwi doesn't seem too happy to support multiple windows at the moment.
 
