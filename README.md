@@ -8,13 +8,19 @@ Chrome for Android opens links from external apps in new windows and Kiwi Browse
 
 Absent any chrome://flags (or native) setting to disable this feature, I wrote this extension that forces all tabs to open in a single window: one window is designated the main window, and any new tabs that are created in some other window are moved to that window.
 
-Latest version is more selective about which tabs it moves for better compatibility with desktop browsers.
+Version 1.4.0 is more selective about which tabs it moves for better compatibility with desktop browsers. Specifically, only http://, https://, file:// and chrome:// tabs are moved.
 
-To it install it:
+To install it in a mobile browser:
 
 - Download the OneWindow.crx file from Releases here
 - In your browser, Menu > Extensions
 - Click "+ (from .zip/.crx/.user.js)" button
 - Choose the OneWindow.crx file you downloaded
+
+To install it in a desktop browser (e.g. Chrome):
+
+- Download the OneWindow.crx file from Releases here
+- In your browser, Menu > Extensions
+- Drag the OneWindow.crx file into the Extensions window
 
 Reddit thread: https://www.reddit.com/r/kiwibrowser/comments/1861zpw/oc_extension_to_keep_all_your_tabs_in_one_window/

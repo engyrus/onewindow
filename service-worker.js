@@ -1,17 +1,17 @@
 // OneWindow - force all tabs to stay in one window
-// Jerry Kindall <engyrus@gmail.com>
+// Jerry Kindall <engyrus@gmail.com> v1.4
 
-// Mainly for use with Kiwi Browser on Android, which recently inherited from Chrome for Android the ability
-// to have multiple windows open.  When exactly this happens is unclear to me and I hate having to go close
-// and combine the windows.  Also, the tools for managing windows are crappy at best at this stage.  Since
-// Kiwi supports Chrome extensions I figured I'd roll my own to move tabs that open in a new window to the
-// already-existing one.  There's some weirdness in this code based on occasional error messages I'd get
+// Created for use with Kiwi Browser on Android, which inherited from Chrome for Android the ability
+// to have multiple windows open. When exactly this happens is unclear to me and I hated having to go close
+// and combine the windows. I figured I'd roll my own extension to move tabs that open in a new window to the
+// already-existing one. There's some weirdness in this code based on occasional error messages I'd get
 // about trying to move tabs while they were already being moved, which would leave windows open sometimes.
 // The workaround of retrying after 100 ms when an error occurs moving tabs seems to have solved that.
+// Works for Chrome-based browsers on the desktop too.
 
 // our logging function for easy commenting out
 function log(msg) {
-    // console.log(msg);
+  // console.log(msg);
 }
 
 // gather tabs to the main window. if no main window is established, use window ID passed in
@@ -32,13 +32,15 @@ async function gather_tabs(a_window_id, tries, post_func) {
     if (main_window_id !== undefined) {
         log(`gathering tabs from other windows to main window`);
         let index = a_window_id === main_window_id ? 0 : -1;
+        let protocols = /^(https?)|(chrome)|(file):/   // only tabs that use these protocols (not extension windows)
         for (let w of await chrome.windows.getAll()) {
             log(`looking at window ${w.id}`);
             if (w.id !== main_window_id) {
-                let w_tabs = (await chrome.tabs.query({windowId: w.id})).map(t => t.id).filter(t => t !== undefined);
+                let w_tabs = (await chrome.tabs.query({windowId: w.id})).filter(
+                    t => t.id !== undefined && protocols.test(t.pendingUrl || t.url)).map(t => t.id);
                 log(`moving tabs ${w_tabs} to window ${main_window_id}`);
                 try {
-                    chrome.tabs.move(w_tabs, {index: index, windowId: main_window_id});
+                    w_tabs && chrome.tabs.move(w_tabs, {index: index, windowId: main_window_id});
                 } catch (e) {
                     log(`unable to gather tabs, will try again in 100ms; try ${tries}`);
                     if (tries < 5) {
@@ -48,16 +50,7 @@ async function gather_tabs(a_window_id, tries, post_func) {
                     }
                     return;
                 }
-                // try to close window we just moved windows from. 
-                // usually it won't be there because it auto-closed when the last tab was moved
-                try {
-                    chrome.windows.remove(w.id);
-                } catch { 
-                    // ignore this error
-                }
-                if (post_func !== undefined) {
-                    await post_func();
-                }
+                post_func && post_func();
             } else {
                 log(`... this is the main window`);
             }
