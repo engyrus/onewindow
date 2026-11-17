@@ -3,7 +3,7 @@
   "name": "OneWindow",
   "author": "engyrus@gmail.com",
   "description": "Forces all tabs to open in a single window.",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "permissions": ["storage", "tabs", "windows"],
   "background": {
     "service_worker": "service-worker.js"
